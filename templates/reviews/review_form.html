@@ -1,0 +1,27 @@
+{% extends 'reviews/base.html' %}
+
+{% block body %}
+<div class="container">
+    {% if request.user.is_authenticated %}
+    <div class="card">
+        <div class="card-body">
+            <form method="POST" action="{% url 'review-form' %}">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="title" class="form-label">Title:</label>
+                    <input type="text" class="form-control" id="title" name="title" required>
+                </div>
+                <div class="mb-3">
+                    <label for="content" class="form-label">Content:</label>
+                    <input type="text" class="form-control" id="content" name="content" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+    {% else %}
+    <h1>TO WRITE REVIEWS - YOU SHOULD REGISTER FIRST</h1>
+    <meta http-equiv="refresh" content="3; URL=/register" />
+    {% endif %}
+</div>
+{% endblock %}
